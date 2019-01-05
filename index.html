@@ -17,11 +17,13 @@
         <button id="searchgifs" type="submit">Submit</button>
 
         <!-- this div is where our generated buttons will append to -->
-        <div class="inner"></div>
+        <div class="inner" style="margin: 0 auto;
+        width: 400px;"></div>
         <!-- this div is where we want to append our gifs to -->
         <div class="container">
             <div class="row">
-                <div id="gifArea" class="animated bounceIn d-flex"></div>
+                <div id="gifArea" class="animated bounceIn d-flex" style="margin: 0 auto;
+                width: 400px;"></div>
             </div>
         </div>
         <br><br>
@@ -32,7 +34,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script type="text/javascript">
             //array for marvel buttons
-
             let tempHero;
             let topics = {
                 avenger: 'Avengers',
@@ -53,67 +54,62 @@
                 storm: 'Storm',
                 blackwidow: 'Black Widow'
             }
-
-
             //appended buttons to html
-           
+
             let result = $('.inner');
+
             result.html('');
-            for (var i = 0; i < topics.length; i++) {
-                result.append('<button class="btn btn-info character" data-name=" ' + topics[i] + '" > ' + topics[i] +
-                    '</button>');
+
+
+
+            for (var key in topics) {
+                result.append('<div class="col-md-2" style="padding: 10px;"><button data-hero="' + key +
+                    '" class="btn btn-info character">' + topics[key] + '</button></div>');
             }
 
-
             //create onClick function that loops through array
-            $(result).on('click', function (hero) {
-                if (tempHero != hero) {
-                    $("#result").empty();
-                }
-                tempHero = hero;
+            $(".character").on('click', function () {
 
+                let hero = $(this).attr("data-hero");
 
                 // Use the 'x' variable to search for the given topic
-                var queryURL = 'https://api.giphy.com/v1/gifs/search?q=' + topics[i] +
+                var queryURL = 'https://api.giphy.com/v1/gifs/search?q=' + hero +
                     '&api_key=O1BAOVC6KMlY8S43M8z6gd6i3Gv1ftff&limit=10';
-
                 // Make an AJAX request to the queryURLs
                 $.ajax({
                     url: queryURL,
                     method: 'GET'
-                }).then(function (data) {
-                    console.log(data);
+                }).then(function (response) {
+
+                    for (var i = 0; i < response.data.length; i++) {
+                        // Create variables with elements to contain the incoming response
+                        var gifDiv = $('#gifArea');
+                        var p = $('<p>').text('Rating: ' + response.data[i].rating);
+                        // set resultgif to an <img> tag
+                        var resultgif = $(
+                            '<img class="img-fluid img-thumbnail animated fadeIn">');
+                        // give the <img> tag a 'src' attribute which is equal to the url
+                        resultgif.attr('src', response.data[i].images.fixed_height.url);
+                        // Append the resultgif and rating to the gifDiv
+                        gifDiv.append(resultgif);
+                        gifDiv.append(p);
+                        // Append the gifDiv to the gifArea
+                        $('#gifArea').append(gifDiv);
+                    }
+
                 });
 
-                // // For every item returned in the search...
-                // for (var i = 0; i < response.data.length; i++) {
-                //     // Create variables with elements to contain the incoming response
-                //     var gifDiv = $('#gifArea');
-                //     var p = $('<p>').text('Rating: ' + response.data[i].rating);
 
-                //     // set resultgif to an <img> tag
-                //     var resultgif = $(
-                //         '<img class="img-fluid img-thumbnail animated fadeIn">');
-
-                //     // give the <img> tag a 'src' attribute which is equal to the url
-                //     resultgif.attr('src', response.data[i].images.fixed_height.url);
-
-                //     // Append the resultgif and rating to the gifDiv
-                //     gifDiv.append(resultgif);
-                //     gifDiv.append(p);
-
-                //     // Append the gifDiv to the gifArea
-                // $('#gifArea').append(gifDiv);
-                // }
+                // For every item returned in the search...
 
             });
-
-
             //this is for the input bar where we will append/create button something typed into the input to our array
             // let newTopic = $('input#searchText').val();
             // $(topics).push(newTopic);
             // $('.inner').append('<button class="btn btn-info character" data-name=" ' + newTopic + '" > ' + newTopic +
             //     '</button>');
+
+            //The rest is not here, I hit a roadblock will fix later.
         </script>
 
 

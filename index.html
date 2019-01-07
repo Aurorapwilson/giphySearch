@@ -13,21 +13,27 @@
 
 <body>
 
-    <body style="display:flex;">
-        <div class="searchbar">
-            <input type="text" id="searchText" placeholder="Search..">
-            <button id="searchgifs" type="submit">Submit</button>
+    <body style="display:flex; align-content: center;">
+        <div class="topelements">
+                <div class="searchbar">
+                        <input type="text" id="searchText" placeholder="Search..">
+                        <button id="searchgifs" type="submit">Submit</button>
+                    </div>
+                   
+            
+                    <!-- this div is where our generated buttons will append to -->
+                    <div class="inner" style="margin: 0 auto;
+                    width: 980px; display:-webkit-box; flex-direction: row; flex-wrap: wrap; "></div>
         </div>
-       
-
-        <!-- this div is where our generated buttons will append to -->
-        <div class="inner" style="margin: 0 auto;
-        width: 980px; display:-webkit-box; flex-direction: row; flex-wrap: wrap; "></div>
+   
         <!-- this div is where we want to append our gifs to -->
         <div class="container">
             <!-- <div class="row"> -->
-                <div id="gifArea" class="animated bounceIn d-flex" style="margin: 0 auto;
-                width: 400px;"></div>
+                <div class="jiffcontainer" style="padding:10px; align-content: center; flex: wrap;">
+                        <div id="gifArea" class="animated bounceIn d-flex" style="margin: 0 auto;
+                        width: 400px;"></div>
+                </div>
+               
             <!-- </div> -->
         </div>
         <br><br>

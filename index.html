@@ -80,6 +80,11 @@
             $(".character").on('click', function () {
 
                 let hero = $(this).attr("data-hero");
+                if(tempHero != hero)
+                {
+                    $("#gifArea").empty();
+                }
+                tempHero = hero;
 
                 // Use the 'x' variable to search for the given topic
                 var queryURL = 'https://api.giphy.com/v1/gifs/search?q=' + hero +

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +14,7 @@
 
 <body>
 
-    <body style="display:flex; align-content: center;">
+    <body>
         <div class="topelements">
                 <div class="searchbar">
                         <input type="text" id="searchText" placeholder="Search..">
@@ -22,16 +23,14 @@
                    
             
                     <!-- this div is where our generated buttons will append to -->
-                    <div class="inner" style="margin: 0 auto;
-                    width: 980px; display:-webkit-box; flex-direction: row; flex-wrap: wrap; "></div>
+                    <div class="inner row"></div>
         </div>
    
         <!-- this div is where we want to append our gifs to -->
         <div class="container">
             <!-- <div class="row"> -->
-                <div class="jiffcontainer" style="padding:10px; align-content: center; flex: wrap;">
-                        <div id="gifArea" class="animated bounceIn d-flex" style="margin: 0 auto;
-                        width: 400px;"></div>
+                <div class="jiffcontainer">
+                        <div id="gifArea" class="animated bounceIn d-flex row"></div>
                 </div>
                
             <!-- </div> -->
@@ -73,8 +72,8 @@
 
 
             for (var key in topics) {
-                result.append('<div class ="row;" ><div class="col-md-2" style="padding: 10px;"><button data-hero="' + key +
-                    '" class="btn btn-info character">' + topics[key] + '</button></div></div>');
+                result.append('<div class="col-md-2" style="padding: 10px;"><button data-hero="' + key +
+                    '" class="btn btn-info character">' + topics[key] + '</button></div>');
             }
 
             //create onClick function that loops through array
@@ -94,17 +93,19 @@
                     for (var i = 0; i < response.data.length; i++) {
                         // Create variables with elements to contain the incoming response
                         var gifDiv = $('#gifArea');
+                        var imageContainer = $('<div class="col-md-4"></div>');
                         var p = $('<p>').text('Rating: ' + response.data[i].rating);
                         // set resultgif to an <img> tag
                         var resultgif = $(
-                            '<img class="img-fluid img-thumbnail animated fadeIn">');
+                            '<img class="img-fluid img-thumbnail animated fadeIn" style="width: 100%;height: 100%;">');
                         // give the <img> tag a 'src' attribute which is equal to the url
                         resultgif.attr('src', response.data[i].images.fixed_height.url);
                         // Append the resultgif and rating to the gifDiv
-                        gifDiv.append(resultgif);
-                        gifDiv.append(p);
+                        imageContainer.append(resultgif)
+                        // gifDiv.append(resultgif);
+                        imageContainer.append(p);
                         // Append the gifDiv to the gifArea
-                        $('#gifArea').append(gifDiv);
+                        $('#gifArea').append(imageContainer);
                     }
 
                 });

@@ -6,25 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" href="asset/reset.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
 </head>
 
 <body>
 
-    <body>
-        <input type="text" id="searchText" placeholder="Search..">
-        <button id="searchgifs" type="submit">Submit</button>
+    <body style="display:flex;">
+        <div class="searchbar">
+            <input type="text" id="searchText" placeholder="Search..">
+            <button id="searchgifs" type="submit">Submit</button>
+        </div>
+       
 
         <!-- this div is where our generated buttons will append to -->
         <div class="inner" style="margin: 0 auto;
-        width: 400px;"></div>
+        width: 980px; display:-webkit-box; flex-direction: row; flex-wrap: wrap; "></div>
         <!-- this div is where we want to append our gifs to -->
         <div class="container">
-            <div class="row">
+            <!-- <div class="row"> -->
                 <div id="gifArea" class="animated bounceIn d-flex" style="margin: 0 auto;
                 width: 400px;"></div>
-            </div>
+            <!-- </div> -->
         </div>
         <br><br>
 
@@ -63,8 +67,8 @@
 
 
             for (var key in topics) {
-                result.append('<div class="col-md-2" style="padding: 10px;"><button data-hero="' + key +
-                    '" class="btn btn-info character">' + topics[key] + '</button></div>');
+                result.append('<div class ="row;" ><div class="col-md-2" style="padding: 10px;"><button data-hero="' + key +
+                    '" class="btn btn-info character">' + topics[key] + '</button></div></div>');
             }
 
             //create onClick function that loops through array
